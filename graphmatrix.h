@@ -1,46 +1,62 @@
 #ifndef GRAPHMATRIX_H
 #define GRAPHMATRIX_H
 #include <iostream>
+#include <iostream>
+#include <fstream>
+#include <vector>
 class GraphMatric
 {
 public:
 
     GraphMatric(int num_vertices) {
         numvertices = num_vertices;
-        //dynamically initializing the vertice of the matrix
         vertextMatrix = new int*[numvertices];
         for(int i = 0;i < numvertices;i++){
-            vertextMatrix[i] = new int[2];
+            vertextMatrix[i] = new int[numvertices];
         }
-        //setting the values of the matrix to 0
         for(int i = 0; i < numvertices;i++){
-            for(int k = 0; k < 2; k++){
+            for(int k = 0; k < numvertices; k++){
                 vertextMatrix[i][k] = 0;
             }
         }
     }
-    //using the destructor free up dynamically allocated memory
+
     ~GraphMatric(){
-        for(int i = 0; i < numvertices;i++){
-            for(int k = 0; k < 2;k++){
-                delete vertextMatrix[i][k];
-            }
-        }
+        delete vertextMatrix;
     }
-    //setting the value to one when adding the edge
+
     void addEdge(int vertex1,int vertext2){
         vertextMatrix[vertex1][vertext2] = 1;
     }
-    //print ing the graph
+
     void printGraph(){
         for(int i = 0; i < numvertices; i++){
-            for(int k = 0; k < 2; k++){
+            for(int k = 0; k < numvertices; k++){
                 std::cout<<vertextMatrix[i][k];
             }
         }
     }
-    void getFirstVertex(){
 
+    int getFirstVertex(){
+        bool is_first = false;
+        int first_vertex = 0;
+        while(!is_first && first_vertex <= numvertices){
+            is_first = true;
+            for(int i = 0; i < numvertices;i++){
+                if(vertextMatrix[i][first_vertex] == 1){
+                    is_first = false;
+                }
+            }
+            first_vertex += 1;
+        }
+        return first_vertex;
+    }
+
+    bool isThereAnEdge(int row,int column){
+        if(vertextMatrix[row][column] == 1){
+            return true;
+        }
+        return false;
     }
 
 private:
