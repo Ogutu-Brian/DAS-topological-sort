@@ -7,7 +7,6 @@
 class GraphMatric
 {
 public:
-
     GraphMatric(int num_vertices) {
         numvertices = num_vertices;
         vertextMatrix = new int*[numvertices];
@@ -22,17 +21,20 @@ public:
     }
 
     ~GraphMatric(){
-        delete vertextMatrix;
+        delete [] vertextMatrix;
     }
 
     void addEdge(int vertex1,int vertext2){
         vertextMatrix[vertex1][vertext2] = 1;
+        numEdges += 1;
     }
 
     void printGraph(){
         for(int i = 0; i < numvertices; i++){
             for(int k = 0; k < numvertices; k++){
-                std::cout<<vertextMatrix[i][k];
+                if(vertextMatrix[i][k] == 1){
+                    std::cout<<i<<" "<<k<<std::endl;
+                }
             }
         }
     }
@@ -62,6 +64,6 @@ public:
 private:
   int **vertextMatrix;
   int numvertices;
-  int numEdges;
+  int numEdges = 0;
 };
 #endif // GRAPHMATRIX_H
