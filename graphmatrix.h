@@ -30,19 +30,20 @@ public:
     }
 
     void printGraph(){
+        std::cout<<"Adjacency Matrix:"<<std::endl;
         for(int i = 0; i < numvertices; i++){
             for(int k = 0; k < numvertices; k++){
-                if(vertextMatrix[i][k] == 1){
-                    std::cout<<i<<" "<<k<<std::endl;
-                }
+                std::cout<<vertextMatrix[i][k]<<" ";
             }
+            std::cout<<"\n";
         }
     }
 
-    int getFirstVertex(){
+    int getFirstVertex(bool &is_cyclic){
         bool is_first = false;
         int first_vertex = 0;
-        while(!is_first && first_vertex <= numvertices){
+
+        while(!is_first && first_vertex < numvertices){
             is_first = true;
             for(int i = 0; i < numvertices;i++){
                 if(vertextMatrix[i][first_vertex] == 1){
@@ -51,7 +52,18 @@ public:
             }
             first_vertex += 1;
         }
-        return first_vertex;
+
+        if(!is_first){
+            //the graph has a cycle hence no first
+           is_cyclic = true;
+        }
+
+        for(int i = 0; i < numvertices; i++){
+            vertextMatrix[first_vertex - 1][i] = 0;
+            vertextMatrix[i][first_vertex - 1] = 1;
+        }
+
+        return first_vertex - 1;
     }
 
     bool isThereAnEdge(int row,int column){
