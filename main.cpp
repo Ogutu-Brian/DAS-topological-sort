@@ -49,6 +49,15 @@ int main()
         graph_matrix.addEdge(e->origin,e->final);
     }
     graph_matrix.printGraph();
+    std::cout<<"\n"<<std::endl;
+
+    std::cout<<"Ajacency List..."<<std::endl;
+    GraphList graph_list(number_vertices);
+
+    for(edge* e:edges){
+        graph_list.addEdge(e->origin,e->final);
+    }
+    graph_list.printGraph();
 
     std::cout<<"Now topologically sorting graph\n"<<std::endl;
 
@@ -75,5 +84,6 @@ int main()
         stack.pop(top);
         std::cout<<top<<" ";
     }
+
     std::cout<<"\n"<<std::endl;
 }

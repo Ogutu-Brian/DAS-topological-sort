@@ -12,7 +12,7 @@ public:
         }
         for(int i = 0; i < numVertices; i++){
             for(int k = 0; k < numVertices; k++){
-                headArray[i][k].value = NULL;
+                headArray[i][k].value = -1;
                 headArray[i][k].next = NULL;
             }
         }
@@ -34,11 +34,14 @@ public:
 
     void printGraph(){
         for(int i = 0; i < numVertices; i++){
+            std::cout<<i;
             for(int k = 0; k < numVertices; k++){
-                if(headArray[i][k].value != NULL){
-                    std::cout<<headArray[i][k].value<<" "<<headArray[i][k].next->value<<std::endl;
+                if(headArray[i][k].value != -1){
+                    std::cout<<"-->"<<headArray[i][k].next->value;
                 }
             }
+            std::cout<<"-->NULL\n";
+            std::cout<<std::endl;
         }
     }
 
