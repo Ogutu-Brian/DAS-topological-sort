@@ -4,10 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-class GraphMatric
+class GraphMatrix
 {
 public:
-    GraphMatric(int num_vertices) {
+    GraphMatrix(int num_vertices) {
         numvertices = num_vertices;
         vertextMatrix = new int*[numvertices];
         for(int i = 0;i < numvertices;i++){
@@ -20,7 +20,7 @@ public:
         }
     }
 
-    ~GraphMatric(){
+    ~GraphMatrix(){
         delete [] vertextMatrix;
     }
 
